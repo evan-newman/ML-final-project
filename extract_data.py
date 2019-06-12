@@ -12,6 +12,9 @@ def extractData():
             entries = line.split('\t')
             data.append(list(map(float, entries[2:])))
             label.append(float(entries[1]))
+    #         data.append((list(map(float, entries[2:])), int(entries[1])))
+    
+    # print(data[0])
 
     
     classLabel = np.array(label)
