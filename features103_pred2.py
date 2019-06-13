@@ -1,5 +1,5 @@
 import numpy as np
-from imblearn.over_sampling import SMOTE
+from imblearn.over_sampling import BorderlineSMOTE
 from sklearn import model_selection
 from sklearn import metrics
 from sklearn.tree import DecisionTreeClassifier
@@ -41,7 +41,7 @@ def main():
 
     X_train, X_test, y_train, y_test = model_selection.train_test_split(trainData, trainLabel, test_size = 0.33)
 
-    X_train, y_train = SMOTE().fit_resample(X_train, y_train)
+    X_train, y_train = BorderlineSMOTE().fit_resample(X_train, y_train)
 
     clf_train = DecisionTreeClassifier(criterion='entropy', max_depth=5)
     clf_train = clf_train.fit(X_train, y_train)
@@ -54,7 +54,7 @@ def main():
 
     ###########################################################
 
-    X_train, y_train = SMOTE().fit_resample(trainData, trainLabel)
+    X_train, y_train = BorderlineSMOTE().fit_resample(trainData, trainLabel)
  
     clf_test = DecisionTreeClassifier(criterion='entropy', max_depth=5)
     clf_test = clf_test.fit(X_train, y_train)
@@ -67,7 +67,7 @@ def main():
 
     o = open('features103_pred2.txt', 'w')
     for i in range(len(extractIds)):
-        entry = extractIds[i] + "\t" + str(onlyPKpredictions_test[i])
+        entry = extractIds[i] + "," + str(onlyPKpredictions_test[i])
         o.write(entry)
         o.write('\n')
 
